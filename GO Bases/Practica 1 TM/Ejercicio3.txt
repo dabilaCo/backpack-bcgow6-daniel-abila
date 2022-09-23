@@ -1,0 +1,7 @@
+  var 1nombre string  -> la variable no puede empezar con un número - var nombre string
+  var apellido string   --> Esta bien declarada
+  var int edad   --> hay que indicar el nombre de la viarable antes del tipo de dato - var edad int
+  1apellido := 6 --> La variable no puede empezar con un número - apellido := 6
+  var licencia_de_conducir = true  --> Si el nombre esta compuesto por varias palabras, hay que utilizar camelCase - licenciaDeConducir = true
+  var estatura de la persona int --> No puede tener espacios el nombre de la variable y requiere camelCase
+  cantidadDeHijos := 2 --> Esta bien declarada
