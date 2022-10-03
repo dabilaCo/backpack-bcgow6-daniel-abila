@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "firstname": "Juan",
+        "lastname": "Perez",
+        "email": "juanandres.perez@mercadolibre.com.co",
+        "age": 19,
+        "height": 176,
+        "isActive": true,
+        "createdAt": "19-09-2022"
+    },
+    {
+        "id": 2,
+        "firstname": "John",
+        "lastname": "Doe",
+        "email": "johndoe@enterprises.co",
+        "age": 50,
+        "height": 160,
+        "isActive": false,
+        "createdAt": "14-04-2021"
+    },
+    {
+        "id": 1,
+        "firstname": "Jane",
+        "lastname": "Doe",
+        "email": "jane.doe@noidentity.wal.es",
+        "age": 45,
+        "height": 167,
+        "isActive": true,
+        "createdAt": "01-12-2019"
+    }
+]
