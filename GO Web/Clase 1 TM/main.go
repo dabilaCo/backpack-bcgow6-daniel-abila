@@ -7,7 +7,7 @@ import (
 )
 
 type Usuario struct {
-	Id            int
+	Id            int 
 	Nombre        string
 	Apellido      string
 	Email         string
@@ -16,6 +16,7 @@ type Usuario struct {
 	Activo        bool
 	FechaCreacion string
 }
+
 
 func generarUsuarios() []Usuario {
 	usuarios := []Usuario{
@@ -47,14 +48,22 @@ func main() {
 	//creo un router con gin
 	router := gin.Default()
 
-	router.GET("/hello-daniel", func(c *gin.Context) {
+	/*router.GET("/hello-daniel", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "Hola Daniel",
 		})
-	})
+	})*/
 
 	router.GET("/usuarios", GetAll)
+	router.GET("/usuarios/:id", getUser)
 	//corremos nuestro servidor sobre el puerto 8080
 	router.Run(":8080")
 
 }
+
+func getUser(c *gin.Context){
+	usuarios := generarUsuarios()
+	usuario, err := usuarios[c.Param("id")]
+}
+
+
