@@ -3,7 +3,7 @@ package handler
 import (
 	"strconv"
 
-	"github.com/dabilaCo/backpack-bcgow6-daniel-abila/GOWeb/Clase2TT/internal/products"
+	"github.com/dabilaCo/backpack-bcgow6-daniel-abila/GOWeb/Clase-2-TT/internal/products"
 	"github.com/gin-gonic/gin"
 )
 
