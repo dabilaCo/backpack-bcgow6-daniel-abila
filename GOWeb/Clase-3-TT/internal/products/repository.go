@@ -63,7 +63,7 @@ func (r *repository) Store(id int, name, typeRequest string, amount int, price f
 }
 func (r *repository) LastID() (int, error) {
 	var requestSlice []request
-	err := r.db.Read(requestSlice)
+	err := r.db.Read(&requestSlice)
 	if err != nil{
 		return 0, err
 	}

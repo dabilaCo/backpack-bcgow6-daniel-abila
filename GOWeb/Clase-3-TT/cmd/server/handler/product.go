@@ -55,7 +55,7 @@ func (pr *Product) Store() gin.HandlerFunc {
 			return
 		}
 		var req request
-		if err := c.Bind(&req); err != nil {
+		if err := c.ShouldBindJSON(&req); err != nil {
 			c.JSON(404, gin.H{
 				"error": err.Error(),
 			})
