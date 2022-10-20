@@ -62,8 +62,8 @@ func main() {
 }
 
 func getUser(c *gin.Context){
-	usuarios := generarUsuarios()
-	usuario, err := usuarios[c.Param("id")]
+	/*usuarios := generarUsuarios()
+	/*usuario, err := usuarios[c.Param("id")]*/
 }
 
 
