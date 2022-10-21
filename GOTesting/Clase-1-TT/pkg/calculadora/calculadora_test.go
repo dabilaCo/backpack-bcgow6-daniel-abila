@@ -24,7 +24,7 @@ func TestDividir(t *testing.T) {
 
 func TestRestar(t *testing.T) {
 	// Arrange
-	num1 := 11
+	num1 := 10
 	num2 := 5
 	esperado := 5
 	resta()

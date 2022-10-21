@@ -1,50 +1,33 @@
 package products
 
 import (
-	"fmt"
+	"errors"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
-type StubReadEngine struct{}
+type StubReadEngine struct {
+	mockedData    []request
+	readWasCalled bool
+}
 
-func (g StubReadEngine) Read(data interface{}) error {
-	products := []request{
-		{
-			ID:          1,
-			Name:        "Mouse",
-			TypeRequest: "7287828727",
-			Amount:      26,
-			Price:       2,
-		},
-		{
-			ID:          2,
-			Name:        "Teclado",
-			TypeRequest: "ACH-VC5",
-			Amount:      26,
-			Price:       1500,
-		},
+func (g *StubReadEngine) Read(data interface{}) error {
+
+	g.readWasCalled = true
+	a, ok := data.(*[]request)
+	if !ok {
+		return errors.New("it failed!")
 	}
-	otro := data.(*[]request)
-	*otro = append(*otro, products...)
+	*a = g.mockedData
 	return nil
 }
 
-func (g StubReadEngine) Write(data interface{}) error {
+func (g *StubReadEngine) Write(data interface{}) error {
 	return nil
 }
 
 func TestGetAll(t *testing.T) {
-
-	db := StubReadEngine{}
-	repository := NewRepository(db)
-
-	prod, err := repository.GetAll()
-	if err != nil {
-		fmt.Println("Se rompió")
-	}
-
 	expectedProducts := []request{
 		{
 			ID:          1,
@@ -61,28 +44,16 @@ func TestGetAll(t *testing.T) {
 			Price:       1500,
 		},
 	}
-	assert.Equal(t, expectedProducts, prod)
+	db := &StubReadEngine{mockedData: expectedProducts}
+	r := NewRepository(db)
+
+	out, err := r.GetAll()
+
+	assert.Nil(t, err)
+	assert.Equal(t, expectedProducts, out)
 }
 
-type MockRead struct {
-	readCheck bool
-	productos []request
-}
-
-func (mk *MockRead) Read(data interface{}) error {
-	mk.readCheck = true
-	castData := data.(*[]request)
-	*castData = mk.productos
-	return nil
-}
-
-func (mk *MockRead) Write(data interface{}) error {
-	castData := data.(*[]request)
-	mk.productos = *castData
-	return nil
-}
-
-func TestUpdateName(t *testing.T) {
+func TestUpdateNameAndPrice(t *testing.T) {
 	productos := []request{
 		{
 
@@ -101,19 +72,18 @@ func TestUpdateName(t *testing.T) {
 		},
 	}
 
-	db := MockRead{productos: productos}
-	repository := NewRepository(&db)
+	expectedProduct := productos[0]
+	updatedName := "After Update"
+	updatedPrice := 2500
+	expectedProduct.Name = updatedName
+	expectedProduct.Price = float64(updatedPrice)
+	db := &StubReadEngine{mockedData: productos, readWasCalled: false}
+	r := NewRepository(db)
 
-	expectedProduct := request{
-		ID:          1,
-		Name:        "After Update",
-		TypeRequest: "7287828727",
-		Amount:      26,
-		Price:       5000,
-	}
+	out, err := r.UpdateNameAndPrice(1, updatedName, float64(updatedPrice))
 
-	newT, err := repository.UpdateNameAndPrice(1, "After Update", 5000)
 	assert.Nil(t, err)
-	assert.True(t, db.readCheck)
-	assert.Equal(t, expectedProduct, newT)
+	assert.Equal(t, expectedProduct, out)
+	assert.True(t, db.readWasCalled)
+
 }
