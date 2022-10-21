@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Mouse",
+    "typeRequest": "7287828727",
+    "amount": 26,
+    "price": 2
+  },
+  {
+    "id": 2,
+    "name": "Teclado",
+    "typeRequest": "ACH-VC5",
+    "amount": 26,
+    "price": 1500
+  },
+  {
+    "id": 3,
+    "name": "Monitor",
+    "typeRequest": "ACH-VC5",
+    "amount": 26,
+    "price": 1500
+  }
+]

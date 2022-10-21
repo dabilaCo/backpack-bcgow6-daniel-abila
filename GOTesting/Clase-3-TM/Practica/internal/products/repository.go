@@ -3,7 +3,7 @@ package products
 import (
 	"fmt"
 
-	"github.com/dabilaCo/backpack-bcgow6-daniel-abila/GOTesting/Clase-2-TT/Practica/pkg/store"
+	"github.com/dabilaCo/backpack-bcgow6-daniel-abila/GOTesting/Clase-3-TM/Practica/pkg/store"
 )
 
 // Generamos una estructura

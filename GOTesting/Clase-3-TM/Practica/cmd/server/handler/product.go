@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"os"
 	"strconv"
-	"github.com/dabilaCo/backpack-bcgow6-daniel-abila/GOTesting/Clase-2-TT/Practica/internal/products"
-	"github.com/dabilaCo/backpack-bcgow6-daniel-abila/GOTesting/Clase-2-TT/Practica/pkg/web"
+	"github.com/dabilaCo/backpack-bcgow6-daniel-abila/GOTesting/Clase-3-TM/Practica/internal/products"
+	"github.com/dabilaCo/backpack-bcgow6-daniel-abila/GOTesting/Clase-3-TM/Practica/pkg/web"
 	
 	
 
