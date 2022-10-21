@@ -2,8 +2,8 @@ package products
 
 import (
 	"fmt"
+
 	"github.com/dabilaCo/backpack-bcgow6-daniel-abila/GOTesting/Clase-2-TM/Practica/pkg/store"
-	
 )
 
 // Generamos una estructura
@@ -28,19 +28,19 @@ type Repository interface {
 	UpdateNameAndPrice(id int, name string, price float64) (request, error)
 }
 
-type repository struct{
+type repository struct {
 	db store.Store
 } //implementa los metodos de la interfaz
 
 func NewRepository(db store.Store) Repository {
 	return &repository{
 		db: db,
-	}	
+	}
 }
 
-func (r *repository) GetAll() (product[]request, err error) {
+func (r *repository) GetAll() (product []request, err error) {
 	err = r.db.Read(&product)
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
 	return product, nil
@@ -50,22 +50,22 @@ func (r *repository) Store(id int, name, typeRequest string, amount int, price f
 	var productSlice []request
 
 	err := r.db.Read(&productSlice)
-	if err != nil{
+	if err != nil {
 		return request{}, err
 	}
 
 	req := request{id, name, typeRequest, amount, price}
 
 	productSlice = append(productSlice, req)
-	if err := r.db.Write(productSlice); err != nil{
+	if err := r.db.Write(productSlice); err != nil {
 		return request{}, err
-	}	
+	}
 	return req, nil
 }
 func (r *repository) LastID() (int, error) {
 	var requestSlice []request
 	err := r.db.Read(&requestSlice)
-	if err != nil{
+	if err != nil {
 		return 0, err
 	}
 	if len(requestSlice) == 0 {
@@ -103,18 +103,35 @@ func (r *repository) Delete(id int) error {
 	arrayProducts = append(arrayProducts[:index], arrayProducts[index+1:]...)
 	return nil
 }
-func (r *repository) UpdateNameAndPrice(id int, name string, price float64) (request, error) {
-	var requestToReturn request
-	updated := false
-	for _, requestToUpdate := range arrayProducts {
-		if requestToUpdate.ID == id {
-			requestToUpdate.Name = name
-			requestToUpdate.Price = price
-			requestToReturn = requestToUpdate
+func (r *repository) UpdateNameAndPrice(id int, name string, price float64) (result request, err error) {
+	//obtener todos los productos del store
+	var productsInStore []request
+	err = r.db.Read(&productsInStore)
+	if err != nil {
+		return
+	}
+
+	//recorremos cada elemento en busqueda de el producto a actualizar
+	var updated bool
+	for i := range productsInStore {
+		if productsInStore[i].ID == id {
+			productsInStore[i].Name = name
+			productsInStore[i].Price = price
+			updated = true
+			result = productsInStore[i]
+			break
 		}
 	}
+
 	if !updated {
-		return request{}, fmt.Errorf("Producto %d no encontrado", id)
+		err = fmt.Errorf("Product not found")
+		return
 	}
-	return requestToReturn, nil
+
+	err = r.db.Write(&result)
+	if err != nil {
+		result = request{}
+		return
+	}
+	return
 }
