@@ -3,7 +3,7 @@ package products
 import (
 	"fmt"
 
-	"github.com/dabilaCo/backpack-bcgow6-daniel-abila/GOTesting/Clase-3-TM/Practica/pkg/store"
+	"github.com/dabilaCo/backpack-bcgow6-daniel-abila/GOTesting/Clase-3-TT/Practica/pkg/store"
 )
 
 // Generamos una estructura
@@ -89,6 +89,8 @@ func (r *repository) Update(id int, name, typeRequest string, amount int, price 
 	}
 	return req, nil
 }
+
+
 func (r *repository) Delete(id int) error {
 	deleted := false
 	var index int

@@ -4,10 +4,10 @@ import (
 	"log"
 	"os"
 
-	"github.com/dabilaCo/backpack-bcgow6-daniel-abila/GOTesting/Clase-3-TM/Practica/cmd/server/handler"
-	"github.com/dabilaCo/backpack-bcgow6-daniel-abila/GOTesting/Clase-3-TM/Practica/docs"
-	"github.com/dabilaCo/backpack-bcgow6-daniel-abila/GOTesting/Clase-3-TM/Practica/internal/products"
-	"github.com/dabilaCo/backpack-bcgow6-daniel-abila/GOTesting/Clase-3-TM/Practica/pkg/store"
+	"github.com/dabilaCo/backpack-bcgow6-daniel-abila/GOTesting/Clase-3-TT/Practica/cmd/server/handler"
+	"github.com/dabilaCo/backpack-bcgow6-daniel-abila/GOTesting/Clase-3-TT/Practica/docs"
+	"github.com/dabilaCo/backpack-bcgow6-daniel-abila/GOTesting/Clase-3-TT/Practica/internal/products"
+	"github.com/dabilaCo/backpack-bcgow6-daniel-abila/GOTesting/Clase-3-TT/Practica/pkg/store"
 	
 
 	
@@ -45,7 +45,7 @@ func main() {
 	pr := r.Group("/products")
 	pr.POST("/", req.Store()) //crear producto
 	pr.GET("/", req.GetAll())
-	pr.DELETE("/:id", req.Delete)
+	pr.DELETE("/:id", req.Delete())
 	pr.PUT("/:id", req.Update())
 	pr.PATCH("/:id", req.UpdateNameAndPrice)
 
