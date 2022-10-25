@@ -16,7 +16,7 @@ func newMockedRepository() Repository {
 func (m *mockedRepository) GetAllBySeller(id string) ([]Product, error){
 	return nil, errors.New("There is an error")
 }
-func Test_GetAllBySeller(t *testing.T){
+func Test_Integration_GetAllBySeller(t *testing.T){
 	//El repo ya contiene información, no es necesario agregarle la misma
 	repo := NewRepository()
 	svc := NewService(repo)
@@ -29,13 +29,17 @@ func Test_GetAllBySeller(t *testing.T){
 		Description: "generic product",
 		Price: 123.55,
 	})
+}
 
-	repo = newMockedRepository()
-	svc = NewService(repo)
+func Test_Unit_GetAllBySeller(t *testing.T) {
+
+	repo := newMockedRepository()
+	svc := NewService(repo)
 	//Esto me va a devolver un error
-	data, err = svc.GetAllBySeller("Nothing")
+	data, err := svc.GetAllBySeller("Nothing")
 	assert.Nil(t, data)
 	assert.NotNil(t, err)
 	assert.Equal(t, err, errors.New("There is an error"))
-
 }
+
+
